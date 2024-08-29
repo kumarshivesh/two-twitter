@@ -1,27 +1,14 @@
-# .gitignore
-
-# Python
+# Exclude Python compiled files
 *.pyc
-*.pyo
-__pycache__/
 
-# Environment
+# Exclude Python cache directory
+__pycache__
+
+# Exclude macOS system files
+.DS_Store
+
+# Exclude environment-specific configuration files
 .env
+.env.db
+
 .venv/
-env/
-venv/
-ENV/
-
-# Django
-*.sqlite3
-db.sqlite3
-/media
-static/
-
-# Pytest
-.pytest_cache/
-
-# Migrations
-*/migrations/*.pyc
-*/migrations/*.py
-*/migrations/*.pyo
