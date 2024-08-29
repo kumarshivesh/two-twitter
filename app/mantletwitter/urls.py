@@ -35,4 +35,7 @@ urlpatterns = [
     path('profile/<str:username>/', views.profile, name='profile'),
      path('profile/<str:username>/media/', views.profile_media, name='profile_media'),
      path('profile/<str:username>/follow/', views.follow_toggle, name='follow_toggle'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 
+
+if bool(settings.DEBUG):
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
