@@ -1,0 +1,23 @@
+<!-- tweet/profile_media.html -->
+{% extends "base.html" %}
+
+{% block title %}
+{{ user.username }}'s Media
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mt-4">{{ user.username }}'s Media</h2>
+    <div class="row">
+        {% for tweet in tweets_with_photos %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="{{ tweet.photo.url }}" alt="Tweet Photo" class="object-fit-cover border rounded " style="width: 100%; height: 250px;">
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,27 @@
+# .gitignore
+
+# Python
+*.pyc
+*.pyo
+__pycache__/
+
+# Environment
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# Django
+*.sqlite3
+db.sqlite3
+/media
+static/
+
+# Pytest
+.pytest_cache/
+
+# Migrations
+*/migrations/*.pyc
+*/migrations/*.py
+*/migrations/*.pyo

@@ -1,0 +1,69 @@
+<!-- mantletwitter/tweet/templates/tweet/likes_list.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Likes
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mt-4">Liked Tweets</h2>
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+            {% for tweet in liked_tweets %}
+            <!-- START: Card -->
+            <div class="card mb-4">
+                <div class="card-header d-flex align-items-center">
+                    <img src="{{ tweet.user.profile.profileimg.url }}" alt="Profile" class="rounded-circle me-2" style="width: 55px; height: 55px; object-fit: cover;">
+                    <div class="ms-3">
+                        <p class="card-title mb-0">
+                            {% if tweet.user.first_name or tweet.user.last_name %}
+                                <span class="fs-5 fw-bolder">{{ tweet.user.first_name }} {{ tweet.user.last_name }}</span>
+                            {% endif %}
+                            <span class="text-muted">@{{ tweet.user.username }} · <small>{{ tweet.created_at|date:"M d, Y" }}</small></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ tweet.text }}</p>
+                    {% if tweet.photo %}
+                        <img src="{{ tweet.photo.url }}" class="card-img-top" alt="Tweet Photo">
+                    {% endif %}
+                    <div class="card-body d-flex justify-content-between">
+                      <a href="{% url 'like_tweet' %}?tweet_id={{tweet.id}}" class="flex items-center space-x-2"   style="text-decoration: none;">
+                        <div class="p-2 rounded-full text-white">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="white" width="25" height="25" class="">
+                            <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+                          </svg>
+                          {% if tweet.no_of_likes == 0 %}
+                          <p>No likes</p>
+                          {% elif tweet.no_of_likes == 1 %}
+                          <p>Liked by {{ tweet.no_of_likes }} person</p>
+                          {% else %}
+                          <p>Liked by {{ tweet.no_of_likes }} people</p>
+                          {% endif %}
+                        </div>
+                      </a>
+          
+                      <a href="{% url 'save_to_favorites' tweet.id %}" class="flex items-center space-x-2" style="text-decoration: none;">
+                        <div class="p-2 rounded-full text-white">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="white" width="25" height="25" class="">
+                            <path d="M9.049 2.927C9.737 1.505 11.26 1.505 11.949 2.927L14.1 7.522l4.902.714c1.148.167 1.607 1.577.777 2.392l-3.548 3.466.837 4.878c.202 1.179-.985 2.073-2.04 1.518L10 16.561l-4.372 2.298c-1.055.555-2.242-.34-2.04-1.518l.837-4.878-3.548-3.466c-.83-.815-.371-2.225.777-2.392l4.902-.714 2.151-4.595z"/>
+                          </svg>
+                          <p>Save to Favorites</p>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="mt-3">
+                        <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Card -->
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
