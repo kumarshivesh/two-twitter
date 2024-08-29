@@ -5,11 +5,17 @@ from .forms import UserRegistrationForm, TweetForm, ProfileEditForm
 from django.contrib.auth.models import User, auth
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 # Create your views here.
 
 def index(request):
   return  render(request, 'index.html')
+
+
+def health_check(request):
+    return JsonResponse({'status': 'ok'})
+
 
 def tweet_list(reqest):
   tweets = Tweet.objects.all().order_by('-created_at')

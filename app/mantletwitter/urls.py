@@ -24,6 +24,7 @@ from tweet import views  # Import the custom_logout view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('health-check/', views.health_check, name='health_check'),
     path('tweet/', include('tweet.urls')),
     path('feed/', views.feed, name='feed'),
     path('posts/', views.user_posts_list, name='user_posts_list'),
